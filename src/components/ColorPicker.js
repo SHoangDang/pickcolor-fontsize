@@ -10,6 +10,7 @@ class ColorPicker extends Component {
 
         this.showHeight = this.showHeight.bind(this)
         this.showColor = this.showColor.bind(this)
+        this.setActiveColor = this.setActiveColor.bind(this)
     }
 
     showHeight() {
@@ -22,10 +23,14 @@ class ColorPicker extends Component {
         return this.props.color === color ? `col-1 p-4 bg-${color} border border-dark` : `col-1 p-4 bg-${color}`;
     }
 
+    setActiveColor(color) {
+        this.props.onReceiveColor(color)
+    }
+
     render() {
 
         let elements = this.state.colors.map((color, index) => {
-            return <div key={index} style={this.showHeight()} className={this.showColor(color)} ></div>
+            return <div key={index} style={this.showHeight()} className={this.showColor(color)} onClick={() => this.setActiveColor(color)}></div>
         });
 
         return (
